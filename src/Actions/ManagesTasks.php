@@ -69,4 +69,19 @@ trait ManagesTasks
 
         return new Task($task, $this);
     }
+
+    /**
+     * Get Task Description.
+     *
+     * @param array $data
+     *
+     * @return Task
+     */
+    public function tasksDescription($id)
+    {
+        $task = $this->get("tasks/{$id}/description");
+
+        return $task;
+    }
+
 }
