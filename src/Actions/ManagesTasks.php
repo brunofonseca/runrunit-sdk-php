@@ -110,4 +110,32 @@ trait ManagesTasks
 
         return $task;
     }
+
+    /**
+     * Set tag
+     *
+     * Custom Methods from Green Signal
+     *
+     * @param array $data
+     *
+     * @return Task
+     */
+
+     public function setTag($taskId,$tag){
+        $task = $this->put("tasks/{$taskId}", [
+            'json' => [
+                'task' => [
+                    "tags_data" => [
+                        [
+                            "name" => "{$tag}"
+                        ]
+                    ],
+                    "delay_after_hooks" => true
+                ],
+            ]
+        ]);
+
+        return new Task($task, $this);
+     }
+
 }
