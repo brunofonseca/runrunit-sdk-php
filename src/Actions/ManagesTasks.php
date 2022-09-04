@@ -59,6 +59,7 @@ trait ManagesTasks
      *
      * @return Task
      */
+
     public function createTask(array $data)
     {
         $task = $this->post('tasks', [
@@ -71,17 +72,42 @@ trait ManagesTasks
     }
 
     /**
-     * Get Task Description.
+     * Set Prerequisites
+     *
+     * Custom Methods from Green Signal
      *
      * @param array $data
      *
      * @return Task
      */
+
+    public function setPreRequisite($taskId, $prerequisiteId)
+    {
+        $task = $this->post("tasks/{$taskId}/prerequisites", [
+            'json' => [
+                'prerequisite' => [
+                    "id" => $prerequisiteId
+                ],
+            ]
+        ]);
+
+        return new Task($task, $this);
+    }
+
+    /**
+     * Task Description
+     *
+     * Custom Methods from Green Signal
+     *
+     * @param array $data
+     *
+     * @return Task
+     */
+
     public function tasksDescription($id)
     {
         $task = $this->get("tasks/{$id}/description");
 
         return $task;
     }
-
 }
